@@ -1,6 +1,8 @@
 package com.health.reservation.controller;
 
 import java.util.List;
+
+import com.health.reservation.dto.TCheckgroupDto;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,9 +77,9 @@ public class TCheckgroupController extends BaseController
     @PreAuthorize("@ss.hasPermi('reservation:checkgroup:add')")
     @Log(title = "检查组管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody TCheckgroup tCheckgroup)
+    public AjaxResult add(@RequestBody TCheckgroupDto dto)
     {
-        return toAjax(tCheckgroupService.insertTCheckgroup(tCheckgroup));
+        return toAjax(tCheckgroupService.insertTCheckgroup(dto));
     }
 
     /**
@@ -86,19 +88,19 @@ public class TCheckgroupController extends BaseController
     @PreAuthorize("@ss.hasPermi('reservation:checkgroup:edit')")
     @Log(title = "检查组管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody TCheckgroup tCheckgroup)
+    public AjaxResult edit(@RequestBody TCheckgroupDto dto)
     {
-        return toAjax(tCheckgroupService.updateTCheckgroup(tCheckgroup));
+        return toAjax(tCheckgroupService.updateTCheckgroup(dto));
     }
 
     /**
-     * 删除检查组管理
+     * 删除检查组
      */
     @PreAuthorize("@ss.hasPermi('reservation:checkgroup:remove')")
     @Log(title = "检查组管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
+	@DeleteMapping("/{id}")
+    public AjaxResult remove(@PathVariable Long id)
     {
-        return toAjax(tCheckgroupService.deleteTCheckgroupByIds(ids));
+        return toAjax(tCheckgroupService.deleteTCheckgroupById(id));
     }
 }

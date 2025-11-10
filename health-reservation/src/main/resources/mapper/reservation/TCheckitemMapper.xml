@@ -27,8 +27,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectTCheckitemList" parameterType="TCheckitem" resultMap="TCheckitemResult">
         <include refid="selectTCheckitemVo"/>
         <where>  
-            <if test="code != null  and code != ''"> and code like concat('%', #{code}, '%')</if>
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+<!--            <if test="code != null  and code != ''"> and code like concat('%', #{code}, '%')</if>-->
+<!--            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>-->
+            <if test="searchValue!=null and searchValue !=''">
+                and code like concat('%', #{searchValue}, '%')
+                or name like concat('%', #{searchValue}, '%')
+            </if>
         </where>
     </select>
     

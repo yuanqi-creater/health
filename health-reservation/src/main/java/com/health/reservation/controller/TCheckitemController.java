@@ -95,4 +95,15 @@ public class TCheckitemController extends BaseController
     {
         return toAjax(tCheckitemService.deleteTCheckitemByIds(ids));
     }
+
+    /**
+     * 查询所有检查项
+     * @return
+     */
+    @PreAuthorize("@ss.hasPermi('reservation:checkitem:list')")
+    @GetMapping("/all")
+    public AjaxResult all()
+    {
+        return success(tCheckitemService.selectTCheckitemList(null));
+    }
 }
